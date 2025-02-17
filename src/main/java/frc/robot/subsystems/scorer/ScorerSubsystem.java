@@ -223,13 +223,15 @@ public class ScorerSubsystem implements IScorer {
 
   @Override
   public void setElevatorTestPosition(double testPosition) {
-    goalElevator = testPosition;
+    elevatorMotorLeader.setPositionReferenceMotionProfiling(limitGoalElevator(testPosition),
+        ElevatorConstants.tunning_values_elevator.PID.arbFF);
     this.state = "ELEVATOR_TEST_POSITION_" + testPosition;
   }
 
   @Override
   public void setPivotTestPosition(double testPosition) {
-    goalPivot = testPosition;
+    pivotMotor.setPositionReferenceMotionProfiling(limitGoalPivot(testPosition),
+        PivotConstants.tunning_values_pivot.PID.arbFF);
     this.state = "PIVOT_TEST_POSITION_" + testPosition;
   }
 
